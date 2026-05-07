@@ -18,7 +18,7 @@ const SECRET_KEY_PREFIX = 'cloudTts.apiKey.';
 const PROVIDERS = [
     { value: 'gemini',     label: 'Gemini',     placeholder: 'AIza…',      url: 'https://aistudio.google.com/apikey' },
     { value: 'openai',     label: 'OpenAI',     placeholder: 'sk-…',       url: 'https://platform.openai.com/api-keys' },
-    { value: 'elevenlabs', label: 'ElevenLabs', placeholder: 'xi-api-key', url: 'https://elevenlabs.io/app/settings/api-keys' },
+    { value: 'elevenlabs', label: 'ElevenLabs', placeholder: 'sk_…',       url: 'https://elevenlabs.io/app/settings/api-keys' },
 ];
 
 // ─── State ───────────────────────────────────────────────────────────────────
