@@ -4,6 +4,14 @@
   "description": "Right-click selected text (editor or terminal) to read it aloud using a cloud TTS provider of your choice.",
   "version": "0.4.0",
   "publisher": "local",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/geryit/cloud-tts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/geryit/cloud-tts/issues"
+  },
+  "homepage": "https://github.com/geryit/cloud-tts#readme",
   "engines": {
     "vscode": "^1.85.0"
   },
