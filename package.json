@@ -2,7 +2,7 @@
   "name": "cloud-tts",
   "displayName": "Cloud TTS (Gemini / OpenAI / ElevenLabs)",
   "description": "Right-click selected text (editor or terminal) to read it aloud using a cloud TTS provider of your choice.",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "publisher": "geryit",
   "repository": {
     "type": "git",
@@ -13,6 +13,7 @@
   },
   "homepage": "https://github.com/geryit/cloud-tts#readme",
   "license": "MIT",
+  "icon": "icon.png",
   "engines": {
     "vscode": "^1.85.0"
   },
