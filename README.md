@@ -7,9 +7,20 @@ Supports **Gemini**, **OpenAI**, and **ElevenLabs** as TTS backends — pick whi
 ## Why
 
 Native macOS `say` voices are robotic. Cloud providers sound human:
+
 - **Gemini 2.5** — natural prosody, supports natural-language style prompts ("Say sarcastically:")
-- **OpenAI gpt-4o-mini-tts** — fast, cheap, supports `instructions`
-- **ElevenLabs** — top-tier voice cloning quality
+  - `gemini-2.5-flash-preview-tts` (default) — faster, cheaper. **~$10/1M chars**
+  - `gemini-2.5-pro-preview-tts` — better prosody. **~$80/1M chars (≈8× flash)**
+- **OpenAI** — fast, cheap, decent quality
+  - `gpt-4o-mini-tts` (default) — newer, supports `instructions`. **~$0.015/min audio**
+  - `tts-1` — cheap and fast, no instructions. **$15/1M chars**
+  - `tts-1-hd` — higher-quality variant of `tts-1`. **$30/1M chars**
+- **ElevenLabs** — top-tier voice cloning quality (most expensive)
+  - `eleven_multilingual_v2` (default) — highest quality multilingual. **~$120/1M chars (API)**
+  - `eleven_turbo_v2_5` — lower latency, slightly less expressive. **~$60/1M chars (API)**
+  - `eleven_flash_v2_5` — lowest latency, cheapest. **~$60/1M chars (API)**
+
+> Prices are approximate ballparks for rough comparison — see each provider's pricing page for exact rates and any free-tier quotas.
 
 ## Install
 

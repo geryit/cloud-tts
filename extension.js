@@ -167,11 +167,26 @@ async function readSelection(secrets, providerOverride) {
 
     const apiKey = await getApiKey(secrets, provider);
     if (!apiKey) {
+        // Use the friendly label ("Gemini" not "gemini") and tell the user
+        // exactly where to grab a key, so the first-run experience doesn't
+        // feel like a dead-end.
+        const providerEntry = PROVIDERS.find((p) => p.value === provider);
+        const label = providerEntry?.label || provider;
         const choice = await vscode.window.showWarningMessage(
-            `Cloud TTS: ${provider} API key not set.`,
+            `Cloud TTS: No ${label} API key set. Get one from ${label}, then paste it here to start reading text aloud.`,
+            { modal: false },
             'Set Key',
+            'Get Key',
         );
-        if (choice === 'Set Key') await setApiKey(secrets, provider);
+        if (choice === 'Set Key') {
+            await setApiKey(secrets, provider);
+        } else if (choice === 'Get Key' && providerEntry?.url) {
+            // Open the provider's key page AND immediately surface the input
+            // box, so when the user comes back from the browser with a key
+            // copied, it's already waiting for them.
+            await vscode.env.openExternal(vscode.Uri.parse(providerEntry.url));
+            await setApiKey(secrets, provider);
+        }
         return;
     }
 

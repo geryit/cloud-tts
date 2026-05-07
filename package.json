@@ -2,7 +2,7 @@
   "name": "cloud-tts",
   "displayName": "Cloud TTS (Gemini / OpenAI / ElevenLabs)",
   "description": "Right-click selected text (editor or terminal) to read it aloud using a cloud TTS provider of your choice.",
-  "version": "0.4.3",
+  "version": "0.4.5",
   "publisher": "geryit",
   "repository": {
     "type": "git",
@@ -128,9 +128,9 @@
             "elevenlabs"
           ],
           "enumDescriptions": [
-            "Google Gemini 2.5 TTS — most natural prosody, supports style prompts.",
-            "OpenAI TTS — fast, cheap, decent quality. gpt-4o-mini-tts supports instructions.",
-            "ElevenLabs — top-tier voice cloning quality, more expensive."
+            "Google Gemini 2.5 TTS — most natural prosody, supports style prompts. ~$10/1M chars (flash).",
+            "OpenAI TTS — fast, cheap. gpt-4o-mini-tts supports instructions. ~$0.015/min audio (mini) – $30/1M chars (hd).",
+            "ElevenLabs — top-tier voice cloning quality. ~$60/1M chars (flash/turbo) – $120/1M chars (multilingual)."
           ],
           "markdownDescription": "Active TTS provider used for Read Aloud. API keys are stored separately via `Cloud TTS: Set API Key…` (encrypted, never written to settings.json)."
         },
@@ -142,8 +142,8 @@
             "gemini-2.5-pro-preview-tts"
           ],
           "enumDescriptions": [
-            "Faster, cheaper.",
-            "Better prosody, more expensive."
+            "Faster, cheaper. ~$10/1M chars (≈$0.30/1M input + $2.50/1M output tokens).",
+            "Better prosody. ~$80/1M chars (≈$1/1M input + $20/1M output tokens, ~8× flash)."
           ],
           "description": "Gemini TTS model."
         },
@@ -174,9 +174,9 @@
             "tts-1-hd"
           ],
           "enumDescriptions": [
-            "Newer, supports `instructions` style prompt. Recommended.",
-            "Cheap and fast, no instructions support.",
-            "Higher quality variant of tts-1."
+            "Newer, supports `instructions` style prompt. Recommended. ~$0.015/min audio (≈$0.60/1M input + $12/1M output tokens).",
+            "Cheap and fast, no instructions support. $15/1M chars.",
+            "Higher quality variant of tts-1. $30/1M chars."
           ],
           "description": "OpenAI TTS model."
         },
@@ -203,9 +203,9 @@
             "eleven_flash_v2_5"
           ],
           "enumDescriptions": [
-            "Highest quality multilingual model.",
-            "Lower latency, slightly less expressive.",
-            "Lowest latency, cheapest."
+            "Highest quality multilingual model. ~$120/1M chars ($0.12/1K, API rate).",
+            "Lower latency, slightly less expressive. ~$60/1M chars ($0.06/1K, API rate).",
+            "Lowest latency, cheapest. ~$60/1M chars ($0.06/1K, API rate)."
           ],
           "description": "ElevenLabs model."
         },
