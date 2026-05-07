@@ -51,7 +51,10 @@ function deactivate() {
 
 // ─── Commands ────────────────────────────────────────────────────────────────
 function openSettings() {
-    vscode.commands.executeCommand('workbench.action.openSettings', '@ext:local.cloud-tts');
+    // Filter by publisher.name; this matches whatever ID VS Code knows the
+    // extension as, which is the Marketplace publisher (geryit) once installed
+    // from there, but stays "local.cloud-tts" if installed from a local VSIX.
+    vscode.commands.executeCommand('workbench.action.openSettings', '@ext:geryit.cloud-tts');
 }
 
 async function switchProvider() {
