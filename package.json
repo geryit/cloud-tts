@@ -1,0 +1,210 @@
+{
+  "name": "cloud-tts",
+  "displayName": "Cloud TTS (Gemini / OpenAI / ElevenLabs)",
+  "description": "Right-click selected text (editor or terminal) to read it aloud using a cloud TTS provider of your choice.",
+  "version": "0.4.0",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./extension.js",
+  "activationEvents": [],
+  "contributes": {
+    "commands": [
+      {
+        "command": "cloudTts.readSelection",
+        "title": "Read Aloud (default provider)",
+        "category": "Cloud TTS"
+      },
+      {
+        "command": "cloudTts.readSelection.gemini",
+        "title": "Read with Gemini",
+        "category": "Cloud TTS"
+      },
+      {
+        "command": "cloudTts.readSelection.openai",
+        "title": "Read with OpenAI",
+        "category": "Cloud TTS"
+      },
+      {
+        "command": "cloudTts.readSelection.elevenlabs",
+        "title": "Read with ElevenLabs",
+        "category": "Cloud TTS"
+      },
+      {
+        "command": "cloudTts.stop",
+        "title": "Stop Playback",
+        "category": "Cloud TTS"
+      },
+      {
+        "command": "cloudTts.openSettings",
+        "title": "Open Settings",
+        "category": "Cloud TTS"
+      },
+      {
+        "command": "cloudTts.switchProvider",
+        "title": "Switch Provider",
+        "category": "Cloud TTS"
+      },
+      {
+        "command": "cloudTts.setApiKey",
+        "title": "Set API Key…",
+        "category": "Cloud TTS"
+      },
+      {
+        "command": "cloudTts.clearApiKeys",
+        "title": "Clear All API Keys",
+        "category": "Cloud TTS"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "cloudTts.readSelection",
+        "key": "cmd+k cmd+r",
+        "when": "editorHasSelection || terminalFocus"
+      },
+      {
+        "command": "cloudTts.stop",
+        "key": "cmd+k cmd+s"
+      }
+    ],
+    "submenus": [
+      {
+        "id": "cloudTts.readMenu",
+        "label": "Read Aloud"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "submenu": "cloudTts.readMenu",
+          "when": "editorHasSelection",
+          "group": "9_cutcopypaste@10"
+        }
+      ],
+      "terminal/context": [
+        {
+          "submenu": "cloudTts.readMenu",
+          "group": "3_edit@10"
+        }
+      ],
+      "cloudTts.readMenu": [
+        {
+          "command": "cloudTts.readSelection.gemini",
+          "group": "1_providers@1"
+        },
+        {
+          "command": "cloudTts.readSelection.openai",
+          "group": "1_providers@2"
+        },
+        {
+          "command": "cloudTts.readSelection.elevenlabs",
+          "group": "1_providers@3"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Cloud TTS",
+      "properties": {
+        "cloudTts.provider": {
+          "type": "string",
+          "default": "gemini",
+          "enum": [
+            "gemini",
+            "openai",
+            "elevenlabs"
+          ],
+          "enumDescriptions": [
+            "Google Gemini 2.5 TTS — most natural prosody, supports style prompts.",
+            "OpenAI TTS — fast, cheap, decent quality. gpt-4o-mini-tts supports instructions.",
+            "ElevenLabs — top-tier voice cloning quality, more expensive."
+          ],
+          "markdownDescription": "Active TTS provider used for Read Aloud. API keys are stored separately via `Cloud TTS: Set API Key…` (encrypted, never written to settings.json)."
+        },
+        "cloudTts.gemini.model": {
+          "type": "string",
+          "default": "gemini-2.5-flash-preview-tts",
+          "enum": [
+            "gemini-2.5-flash-preview-tts",
+            "gemini-2.5-pro-preview-tts"
+          ],
+          "enumDescriptions": [
+            "Faster, cheaper.",
+            "Better prosody, more expensive."
+          ],
+          "description": "Gemini TTS model."
+        },
+        "cloudTts.gemini.voice": {
+          "type": "string",
+          "default": "Kore",
+          "enum": [
+            "Zephyr", "Puck", "Charon", "Kore", "Fenrir", "Leda", "Orus",
+            "Aoede", "Callirrhoe", "Autonoe", "Enceladus", "Iapetus",
+            "Umbriel", "Algieba", "Despina", "Erinome", "Algenib",
+            "Rasalgethi", "Laomedeia", "Achernar", "Alnilam", "Schedar",
+            "Gacrux", "Pulcherrima", "Achird", "Zubenelgenubi",
+            "Vindemiatrix", "Sadachbia", "Sadaltager", "Sulafat"
+          ],
+          "description": "Gemini prebuilt voice. Kore is the most neutral; try Puck or Charon for character."
+        },
+        "cloudTts.gemini.stylePrompt": {
+          "type": "string",
+          "default": "",
+          "description": "Optional natural-language style instruction prepended to the text (e.g., \"Say in a calm, neutral tone:\")."
+        },
+        "cloudTts.openai.model": {
+          "type": "string",
+          "default": "gpt-4o-mini-tts",
+          "enum": [
+            "gpt-4o-mini-tts",
+            "tts-1",
+            "tts-1-hd"
+          ],
+          "enumDescriptions": [
+            "Newer, supports `instructions` style prompt. Recommended.",
+            "Cheap and fast, no instructions support.",
+            "Higher quality variant of tts-1."
+          ],
+          "description": "OpenAI TTS model."
+        },
+        "cloudTts.openai.voice": {
+          "type": "string",
+          "default": "nova",
+          "enum": [
+            "alloy", "ash", "ballad", "coral", "echo", "fable",
+            "onyx", "nova", "sage", "shimmer", "verse"
+          ],
+          "description": "OpenAI voice. Note: ash/ballad/coral/sage/verse only work with gpt-4o-mini-tts."
+        },
+        "cloudTts.openai.instructions": {
+          "type": "string",
+          "default": "",
+          "description": "Style instructions (gpt-4o-mini-tts only). Example: \"Speak in a cheerful, positive tone.\""
+        },
+        "cloudTts.elevenlabs.model": {
+          "type": "string",
+          "default": "eleven_multilingual_v2",
+          "enum": [
+            "eleven_multilingual_v2",
+            "eleven_turbo_v2_5",
+            "eleven_flash_v2_5"
+          ],
+          "enumDescriptions": [
+            "Highest quality multilingual model.",
+            "Lower latency, slightly less expressive.",
+            "Lowest latency, cheapest."
+          ],
+          "description": "ElevenLabs model."
+        },
+        "cloudTts.elevenlabs.voiceId": {
+          "type": "string",
+          "default": "21m00Tcm4TlvDq8ikWAM",
+          "markdownDescription": "ElevenLabs voice ID. Default is **Rachel**. Browse the voice library at https://elevenlabs.io/app/voice-library to find IDs for other voices."
+        }
+      }
+    }
+  }
+}
