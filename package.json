@@ -12,6 +12,7 @@
     "url": "https://github.com/geryit/cloud-tts/issues"
   },
   "homepage": "https://github.com/geryit/cloud-tts#readme",
+  "license": "MIT",
   "engines": {
     "vscode": "^1.85.0"
   },
